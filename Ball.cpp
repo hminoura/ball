@@ -21,13 +21,15 @@ void Ball::init()
   vy = Rand::range(-300, 300);
   ax = 0;
   ay = 0;
+  theta = Rand::range(0, 360);
+  vtheta = Rand::range(-360, 360);
 
-  texture = new sf::Texture;
-  texture->loadFromFile("bomb.png");
+  image.loadFromFile("ball.png");
+  texture.loadFromImage(image);
 
-  sprite.setTexture(*texture);
-  auto size = texture->getSize()/2u;
-  sprite.setOrigin(size.x, size.y);
+  auto center = texture.getSize()/2u;
+  sprite.setTexture(texture, true);
+  sprite.setOrigin(center.x, center.y);
 
   rap.reset();
 }
@@ -46,15 +48,17 @@ void Ball::update()
     vx = -vx;
   if (y < 0 || y > BallApp::window.getSize().y - 1)
     vy = -vy;
+
+  theta += vtheta * dt;
 }
 
 void Ball::draw()
 {
   sprite.setPosition(x, y);
+  sprite.setRotation(theta);
   BallApp::window.draw(sprite);
 }
 
 void Ball::clean()
 {
-  delete texture;
 }

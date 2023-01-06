@@ -1,6 +1,6 @@
-TARGET = main
+TARGET = ball
 
-SRCS   = $(TARGET).cpp App.cpp Timer.cpp Rand.cpp BallApp.cpp Ball.cpp
+SRCS   = main.cpp App.cpp Timer.cpp Rand.cpp BallApp.cpp Ball.cpp
 OBJS   = $(SRCS:%.cpp=%.o)
 ## for macOS (SFML: brew)
 #CXX    = clang++
@@ -9,7 +9,8 @@ OBJS   = $(SRCS:%.cpp=%.o)
 ## for Linux (SfLinux
 CXX    = c++
 CXXFLAGS = -std=c++11 -g
-LIBS     = -lsfml-graphics -lsfml-window -lsfml-system
+# LIBS     = -lsfml-graphics -lsfml-window -lsfml-system
+LIBS	= `pkg-config --libs sfml-all`
 
 all:$(TARGET)
 
@@ -20,10 +21,10 @@ $(TARGET): $(OBJS)
 .cpp.o:
 	$(CXX) $(CXXFLAGS) -c $(INCLUDES) $< 
 
-.PHONY: clean
+.PHONY: clean run
 
 clean:
 	rm -f *.o *~ $(TARGET)
 
-run:
+run: $(TARGET)
 	./$(TARGET)

@@ -1,3 +1,4 @@
+#include <iostream>
 #include "BallApp.h"
 #include "Timer.h"
 
@@ -11,7 +12,9 @@ BallApp::~BallApp(){
 
 void BallApp::init()
 {
-  balls.resize(1);
+  balls.resize(1);     // 画面に表示するボールの個数
+
+  std::cout << "# of balls = " << balls.size() << std::endl;
 
   for (auto& b : balls)
     b.init();
@@ -53,7 +56,4 @@ void BallApp::onClick(sf::Event::MouseButtonEvent mouse){
 
 void BallApp::offClick(sf::Event::MouseButtonEvent mouse){
 }
-
-
-
 

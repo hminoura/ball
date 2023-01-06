@@ -1,3 +1,5 @@
+#include <iostream>
+#include "Timer.h"
 #include "BallApp.h"
 
 int main()
@@ -6,8 +8,11 @@ int main()
   
   app = new BallApp();
 
+  Timer t;
+  t.reset();
   app->init();
-  
+  std::cout << t.get() << 's' << std::endl;
+
   while (app->isActive()){
     app->event();
     app->update();

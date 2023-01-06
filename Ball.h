@@ -1,5 +1,4 @@
 #pragma once
-#include <random>
 #include "Timer.h"
 #include <SFML/Graphics.hpp>
 
@@ -9,12 +8,16 @@ protected:
   double vx, vy;
   double ax, ay;
 
+  double theta;
+  double vtheta;
+
   Timer timer;
   Timer rap;
 
   double life;
 
-  sf::Texture* texture;
+  sf::Image image;
+  sf::Texture texture;
   sf::Sprite sprite;
 
  public:
