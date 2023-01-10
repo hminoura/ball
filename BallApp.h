@@ -5,6 +5,7 @@
 
 class BallApp : public App, public KeyboardListener, public MouseListener {
 private:
+  int nballs;
   std::vector<Ball> balls;
 
 public:
@@ -18,4 +19,5 @@ public:
   void onMouseMoved(sf::Event::MouseMoveEvent mouse);
   void onClick(sf::Event::MouseButtonEvent mouse);
   void offClick(sf::Event::MouseButtonEvent mouse);
+  void setNBalls(int n);
 };

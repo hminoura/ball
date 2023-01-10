@@ -1,17 +1,31 @@
+#include <exception>
 #include <iostream>
 #include "Timer.h"
 #include "BallApp.h"
 
-int main()
+using namespace std;
+
+int main(int argc, char* argv[])
 {
   App* app;
-  
-  app = new BallApp();
 
+  try { 
+    if (argc != 2)
+      throw invalid_argument("");
+  }
+  catch (invalid_argument &e) {
+    cout << argv[0] << " <num>" << endl;
+    exit(-1);
+  }
+
+  app = new BallApp();
+  dynamic_cast<BallApp*>(app)->setNBalls(atoi(argv[1]));
+
+  // 初期化時間を計測
   Timer t;
   t.reset();
   app->init();
-  std::cout << t.get() << 's' << std::endl;
+  cout << t.get() << 's' << endl;
 
   while (app->isActive()){
     app->event();
